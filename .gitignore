@@ -1,0 +1,13 @@
+# Java compiler and build output
+*.class
+/bin/
+/build/
+/out/
+/target/
+
+# IDE and operating system caches
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
