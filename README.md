@@ -42,7 +42,15 @@
 <div align="center"><samp><b>Screenshots</b></samp></div>
 
 <div align="center">
-<samp>Gameplay screenshots are not currently included because the original environment did not provide a reliable interactive desktop display for capture.</samp>
+
+![Gameplay with a score of 1](docs/screenshots/gameplay-score.jpg)
+
+*Gameplay with a score of 1.*
+
+![Game over with a score of 1](docs/screenshots/game-over.jpg)
+
+*Game over with a score of 1.*
+
 </div>
 
 ---
