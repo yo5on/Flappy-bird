@@ -137,3 +137,9 @@ Flappy-bird/
 
 <samp>Java, game development, AI/ML, robotics, and embedded systems.</samp>
 </div>
+
+---
+
+<div align="center"><samp><b>License</b></samp></div>
+
+<samp>This project's original code is licensed under the MIT License. See [LICENSE](LICENSE) for details. Third-party assets and dependencies remain under their respective licenses.</samp>
