@@ -1,5 +1,6 @@
 import javax.swing.*;
 
+// Keep Swing window creation and UI initialization on the Event Dispatch Thread.
 public class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
