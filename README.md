@@ -42,11 +42,11 @@
 
 ![Gameplay with a score of 1](docs/screenshots/gameplay-score.jpg)
 
-*Gameplay with a score of 1.*
+<samp>*Gameplay with a score of 1.*</samp>
 
 ![Game over with a score of 1](docs/screenshots/game-over.jpg)
 
-*Game over with a score of 1.*
+<samp>*Game over with a score of 1.*</samp>
 
 </div>
 
