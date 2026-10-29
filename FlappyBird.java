@@ -119,30 +119,61 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void draw(Graphics g) {
-        //background
-        g.drawImage(backgroundImg, 0, 0, this.boardWidth, this.boardHeight, null);
+        Graphics2D canvas = (Graphics2D) g.create();
+        canvas.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        canvas.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        //bird
-        g.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height, null);
-
-        //pipes
-        for (int i = 0; i < pipes.size(); i++) {
-            Pipe pipe = pipes.get(i);
-            g.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height, null);
+        // Background, bird and pipes keep the original game artwork.
+        canvas.drawImage(backgroundImg, 0, 0, boardWidth, boardHeight, null);
+        canvas.drawImage(bird.img, bird.x, bird.y, bird.width, bird.height, null);
+        for (Pipe pipe : pipes) {
+            canvas.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height, null);
         }
 
-        //score
-        g.setColor(Color.white);
+        // Compact arcade-style score plate.
+        canvas.setColor(new Color(10, 24, 35, 165));
+        canvas.fillRoundRect(14, 14, 92, 52, 18, 18);
+        canvas.setColor(new Color(255, 255, 255, 90));
+        canvas.drawRoundRect(14, 14, 92, 52, 18, 18);
+        canvas.setFont(new Font("SansSerif", Font.BOLD, 27));
+        String scoreText = Integer.toString((int) score);
+        FontMetrics metrics = canvas.getFontMetrics();
+        canvas.setColor(new Color(0, 0, 0, 110));
+        canvas.drawString(scoreText, 61 - metrics.stringWidth(scoreText) / 2 + 1, 49);
+        canvas.setColor(Color.WHITE);
+        canvas.drawString(scoreText, 60 - metrics.stringWidth(scoreText) / 2, 48);
 
-        g.setFont(new Font("Arial", Font.PLAIN, 32));
         if (gameOver) {
-            g.drawString("Game Over: " + String.valueOf((int) score), 10, 35);
+            // Keep the world visible behind a clear, centred end-state card.
+            canvas.setColor(new Color(4, 15, 25, 145));
+            canvas.fillRect(0, 0, boardWidth, boardHeight);
+            int cardW = 286;
+            int cardH = 174;
+            int cardX = (boardWidth - cardW) / 2;
+            int cardY = (boardHeight - cardH) / 2;
+            canvas.setColor(new Color(13, 36, 48, 238));
+            canvas.fillRoundRect(cardX, cardY, cardW, cardH, 24, 24);
+            canvas.setColor(new Color(255, 255, 255, 65));
+            canvas.drawRoundRect(cardX, cardY, cardW, cardH, 24, 24);
+            canvas.setColor(new Color(255, 215, 85));
+            canvas.setFont(new Font("SansSerif", Font.BOLD, 12));
+            canvas.drawString("FLIGHT ENDED", cardX + 22, cardY + 34);
+            canvas.setColor(Color.WHITE);
+            canvas.setFont(new Font("SansSerif", Font.BOLD, 29));
+            canvas.drawString("Game over", cardX + 22, cardY + 72);
+            canvas.setColor(new Color(218, 231, 235));
+            canvas.setFont(new Font("SansSerif", Font.PLAIN, 16));
+            canvas.drawString("Score  " + (int) score, cardX + 22, cardY + 103);
+            canvas.setColor(new Color(255, 215, 85));
+            canvas.setFont(new Font("SansSerif", Font.BOLD, 12));
+            canvas.drawString("PRESS SPACE TO RETRY", cardX + 22, cardY + 143);
+        } else {
+            canvas.setColor(new Color(255, 255, 255, 210));
+            canvas.setFont(new Font("SansSerif", Font.BOLD, 10));
+            canvas.drawString("SPACE  /  FLAP", 16, boardHeight - 18);
         }
-        else {
-            g.drawString(String.valueOf((int) score), 10, 35);
-        }
-        
-	}
+        canvas.dispose();
+    }
 
     public void move() {
         //bird
